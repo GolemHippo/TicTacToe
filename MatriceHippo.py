@@ -47,7 +47,15 @@ def cdts_vic_j1():
     elif board[2]==board[4]==board[6]=='X':
         result=1
         print('GG WP J1')
-
+    elif board[0]==board[3]==board[6]=='X':
+        result=1
+        print('GG WP J1')
+    elif board[1]==board[4]==board[7]=='X':
+        result=1
+        print('GG WP J1')
+    elif board[2]==board[5]==board[8]=='X':
+        result=1
+        print('GG WP J1')
 def cdts_vic_j2():
     global result
     if all(cell=='O' for cell in board[0:3]):
@@ -65,6 +73,15 @@ def cdts_vic_j2():
     elif board[2]==board[4]==board[6]=='O':
         result=2
         print('GG WP J2')
+    elif board[0]==board[3]==board[6]=='O':
+        result=2
+        print('GG WP J2')
+    elif board[1]==board[4]==board[7]=='O':
+        result=2
+        print('GG WP J2')
+    elif board[2]==board[5]==board[8]=='O':
+        result=2
+        print('GG WP J2')
     
 
 def draw():
@@ -80,10 +97,13 @@ while True:
         cdts_vic_j1()
         cdts_vic_j2()
         draw()
-        print(result)
     elif result=='1':
-        print('ggj1')
+        plateau_jeu()
+        break
     elif result=='2':
-        print('ggj2')
+        plateau_jeu()
+        break
     elif result=='0':
-        print('ggdraw')
+        plateau_jeu()
+        break
+exit
