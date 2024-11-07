@@ -20,7 +20,7 @@ def movedujoueur():#Places un 'X' ou un 'O' en alternance à chaque tour.
             board[case_jouée-1]=Joueur_actuel#Remplaces la variable correspondant à la case choisie par 'X' ou 'O'.
             changedejoueur() #Appelles la fonction "changedejoueur" pour changer de joueur après chaque coup.
         else: #Si la case n'est pas vide alors elle a déjà été jouée.
-            print('Vous devez choisir une bonne case!!!')
+            print('Vous devez choisir une bonne case, cette case a déja été jouée!!!')
     else: #Si la case choisie n'est pas entre 1 et 9 alors elle n'est pas valide.
         print(' Vous devez choisir une case comprise entre 1 et 9 !!!')
 
@@ -92,8 +92,7 @@ def draw():#Vérifies que toutes les cases ont été jouées et qu'aucun joueur 
     if all(cell!=' ' for cell in board) and result!=1 and result!=2:
         result=0 #Définis l'état de la partie comme Match Nul.
         
-print('lol')
-exit(12)
+
 
 while True: #Boucle qui fait tourner le jeu jusqu'à la victoire ou match nul
     if result=='ingame':    #Appel des fonctions dans l'ordre nécessaire au fonctionnement du jeu.
