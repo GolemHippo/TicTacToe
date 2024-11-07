@@ -92,8 +92,7 @@ def draw():#Vérifies que toutes les cases ont été jouées et qu'aucun joueur 
     if all(cell!=' ' for cell in board) and result!=1 and result!=2:
         result=0 #Définis l'état de la partie comme Match Nul.
         
-print('lol')
-exit(12)
+
 
 while True: #Boucle qui fait tourner le jeu jusqu'à la victoire ou match nul
     if result=='ingame':    #Appel des fonctions dans l'ordre nécessaire au fonctionnement du jeu.
