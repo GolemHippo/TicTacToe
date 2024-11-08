@@ -4,6 +4,11 @@ Joueur_actuel='X' #Définis le premier joueur comme le joueur 'X'.
 
 result='ingame' #Définis l'état de la partie comme en cours.
 
+signe='O'
+
+import random
+
+
 
 def plateau_jeu(): #Fonction affichant la matrice du jeu et chaque case grâce à la liste board. 
     print("", board[0],"|", board[1],"|", board[2],"")
@@ -28,6 +33,30 @@ def movedujoueur():#Places un 'X' ou un 'O' en alternance à chaque tour.
 def changedejoueur(): #Changes de joueur si l'autre joueur vient de jouer.
     global Joueur_actuel #Permet à la fonction de modifier à l'échelle globale la variable 'Joueur_actuel'.
     Joueur_actuel = 'O' if Joueur_actuel == 'X' else 'X' #Si le joueur actuel est 'X' alors le prochain coup sera pour 'O'.
+
+
+def ia(board,signe):
+    cases_vide =  [i for i in range(len(board)) 
+                   if board[i] is board[i] == " "] 
+    choix = random.choice(cases_vide)
+    board[choix] = signe
+    changedejoueur()
+
+
+def movedujoueurvsia():#Places un 'X' quand c'est le tour du joueur face à l'IA.
+    if Joueur_actuel == 'X':
+        case_jouée=int(input('Où voulez-vous jouez?')) #Demandes au joueur sur quelle case il veut jouer.
+        if 1<=case_jouée<=9:
+            if board[case_jouée-1]==' ': #La liste commence à l'indexe 0 donc n-1 par rapport à la matrice. #Vérifie que la case choisie est bien vide.
+                board[case_jouée-1]='X'#Remplaces la variable correspondant à la case choisie par 'X'.
+                changedejoueur()
+            else: #Si la case n'est pas vide alors elle a déjà été jouée.
+                print('Vous devez choisir une bonne case!!!')
+        else: #Si la case choisie n'est pas entre 1 et 9 alors elle n'est pas valide.
+            print(' Vous devez choisir une case comprise entre 1 et 9 !!!')
+    elif Joueur_actuel == 'O':
+        ia(board,signe)
+        
 
 
 def cdts_vic_j1(): #Vérification si le J1 'X' a gagné, lignes, diagonales,colonnes.
@@ -55,13 +84,12 @@ def cdts_vic_j1(): #Vérification si le J1 'X' a gagné, lignes, diagonales,colo
         
     elif board[2]==board[5]==board[8]=='X':
         result=1
-        
     
 
-def cdts_vic_j2(): #Vérification si le J1 'X' a gagné, lignes, diagonales,colonnes.
+def cdts_vic_j2(): #Vérification si le J2 ou l'IA 'O' a gagné, lignes, diagonales,colonnes.
     global result
     if all(cell=='O' for cell in board[0:3]):
-        result=2 ##Définis l'état de la partie comme Victoire pour J2 'O'
+        result=2 ##Définis l'état de la partie comme Victoire pour J2 ou l'IA 'O'
         
     elif all(cell=='O' for cell in board[3:6]):
         result=2
@@ -83,33 +111,77 @@ def cdts_vic_j2(): #Vérification si le J1 'X' a gagné, lignes, diagonales,colo
         
     elif board[2]==board[5]==board[8]=='O':
         result=2
-        
-    
-    
+            
 
 def draw():#Vérifies que toutes les cases ont été jouées et qu'aucun joueur n'a gagné la partie donc, qu'il y a eu match nul.
-    global result
     if all(cell!=' ' for cell in board) and result!=1 and result!=2:
         result=0 #Définis l'état de la partie comme Match Nul.
-        
 
 
-while True: #Boucle qui fait tourner le jeu jusqu'à la victoire ou match nul
-    if result=='ingame':    #Appel des fonctions dans l'ordre nécessaire au fonctionnement du jeu.
-        plateau_jeu()
-        movedujoueur()
-        cdts_vic_j1()
-        cdts_vic_j2()
-        draw()
-    elif result==1:
-        plateau_jeu()
-        print('GG WP J1')
-        break #Victoire du J1, Fin de partie, fin du programme
-    elif result==2:
-        plateau_jeu()
-        print('GG WP J2')
-        break #Victoire du J2, Fin de partie, fin du programme
-    elif result==0:
-        plateau_jeu()
-        print('Belle partie,\nMatch nul')
-        break #Match nul, Fin de partie, fin du programme
+
+
+
+def mode_PVP():
+    while True: #Boucle qui fait tourner le jeu jusqu'à la victoire ou match nul
+        if result=='ingame':    #Appel des fonctions dans l'ordre nécessaire au fonctionnement du jeu.
+            plateau_jeu()
+            movedujoueur()
+            cdts_vic_j1()
+            cdts_vic_j2()
+            draw()
+        elif result==1:
+            plateau_jeu()
+            print('GG WP J1')
+            break #Victoire du J1, Fin de partie, fin du programme
+        elif result==2:
+            plateau_jeu()
+            print('GG WP J2')
+            break #Victoire du J2, Fin de partie, fin du programme
+        elif result==0:
+            plateau_jeu()
+            print('Belle partie,\nMatch nul')
+            break #Match nul, Fin de partie, fin du programme
+
+
+def mode_PVE():
+    while True: #Boucle qui fait tourner le jeu jusqu'à la victoire ou match nul
+        if result=='ingame':    #Appel des fonctions dans l'ordre nécessaire au fonctionnement du jeu.
+            plateau_jeu()
+            print(Joueur_actuel)
+            print(result)
+            movedujoueurvsia()
+            cdts_vic_j1()
+            cdts_vic_j2()
+            draw()
+        elif result==1:
+            plateau_jeu()
+            print('GG WP J1')
+            break #Victoire du J1, Fin de partie, fin du programme
+        elif result==2:
+            plateau_jeu()
+            print('GG WP IA')
+            break #Victoire de l'IA, Fin de partie, fin du programme
+        elif result==0:
+            plateau_jeu()
+            print('Belle partie,\nMatch nul')
+            break #Match nul, Fin de partie, fin du programme
+
+
+while True:
+    Game_mode = str(input("Quel mode souahitez vous jouer ?\nVous avez le choix entre ces deux modes : \n \
+                          Tapez PVP pour jouer contre un autre joueur \n \
+                          Tapez PVE pour jouer contre une intelligence artificielle \nTapez Q pour quitter. \n Quel choix faites vous? : "))
+    
+    if Game_mode == "PVP":
+        # Appeler la fonction pour le mode PVP
+        mode_PVP()
+        break
+    elif Game_mode == "PVE":
+        # Appeler la fonction pour le mode PVE
+        mode_PVE()
+        break
+    elif Game_mode == "Q":
+        print("Merci d'avoir joué ! À bientôt.")
+        break
+    else:
+        print("Choix invalide. Veuillez réessayer.")
