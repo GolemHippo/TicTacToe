@@ -25,7 +25,7 @@ def movedujoueur():#Places un 'X' ou un 'O' en alternance à chaque tour.
             board[case_jouée-1]=Joueur_actuel#Remplaces la variable correspondant à la case choisie par 'X' ou 'O'.
             changedejoueur() #Appelles la fonction "changedejoueur" pour changer de joueur après chaque coup.
         else: #Si la case n'est pas vide alors elle a déjà été jouée.
-            print('Vous devez choisir une bonne case!!!')
+            print('Vous devez choisir une bonne case, cette case a déja été jouée!!!')
     else: #Si la case choisie n'est pas entre 1 et 9 alors elle n'est pas valide.
         print(' Vous devez choisir une case comprise entre 1 et 9 !!!')
 
@@ -170,7 +170,8 @@ def mode_PVE():
 while True:
     Game_mode = str(input("Quel mode souahitez vous jouer ?\nVous avez le choix entre ces deux modes : \n \
                           Tapez PVP pour jouer contre un autre joueur \n \
-                          Tapez PVE pour jouer contre une intelligence artificielle \nTapez Q pour quitter. \n Quel choix faites vous? : "))
+                          Tapez PVE pour jouer contre une intelligence artificielle \n \
+                          Tapez Q pour quitter. \n Quel choix faites vous? : "))
     
     if Game_mode == "PVP":
         # Appeler la fonction pour le mode PVP
