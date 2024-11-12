@@ -85,7 +85,7 @@ def move_du_joueur_vs_ia():                                     # Places un 'X' 
         
 
 
-def conditionts_de_victoire_j1(): # Vérification si le J1 'X' a gagné, lignes, diagonales,colonnes.
+def conditions_de_victoire_j1(): # Vérification si le J1 'X' a gagné, lignes, diagonales,colonnes.
     
     global resultat
     
@@ -171,6 +171,9 @@ def egalite(): # Vérifies que toutes les cases ont été jouées et qu'aucun jo
 
 def mode_pvp():
     
+    global resultat # Le code marchait bien avant un ajout de code, désormais la fonction 'global'
+    #                                               est nécessitée pour que le programme s'éxecute
+    
     while True: # Boucle qui fait tourner le jeu jusqu'à la victoire ou match nul
         
         if resultat  ==  'en_jeu' : # Appel des fonctions dans l'ordre nécessaire au fonctionnement du jeu.
@@ -179,9 +182,9 @@ def mode_pvp():
             
             move_du_joueur()
             
-            conditionts_de_victoire_j1()
+            conditions_de_victoire_j1()
             
-            conditionts_de_victoire_j2()
+            conditions_de_victoire_j2()
             
             egalite()
             
@@ -212,6 +215,8 @@ def mode_pvp():
 
 def mode_pve():
     
+    global resultat
+    
     while True: # Boucle qui fait tourner le jeu jusqu'à la victoire ou match nul
         
         if resultat == 'en_jeu': # Appel des fonctions dans l'ordre nécessaire au fonctionnement du jeu.
@@ -220,9 +225,9 @@ def mode_pve():
             
             move_du_joueur_vs_ia()
             
-            conditionts_de_victoire_j1()
+            conditions_de_victoire_j1()
             
-            conditionts_de_victoire_j2()
+            conditions_de_victoire_j2()
             
             egalite()
             
@@ -250,7 +255,7 @@ def mode_pve():
             
             break # Match nul, Fin de partie, fin du programme
 
-
+    
 while True:
     
     mode_de_jeu = str(input("Quel mode souhaitez vous jouer ?\nVous avez le choix entre ces deux modes : \n \
