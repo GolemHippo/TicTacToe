@@ -89,15 +89,15 @@ def conditions_de_victoire_j1(): # Vérification si le J1 'X' a gagné, lignes, 
     
     global resultat
     
-    if all(cell == 'X' for cell in cases[0:3]): # all() vérifie si chaque variable est égale, dans ce cas, à 'X'
+    if all(i == 'X' for i in cases[0:3]): # all() vérifie si chaque variable est égale, dans ce cas, à 'X'
         
         resultat = 1 # Définis l'état de la partie comme Victoire pour J1 'X'
         
-    elif all(cell == 'X' for cell in cases[3:6]):
+    elif all(i == 'X' for i in cases[3:6]):
         
         resultat = 1
         
-    elif all(cell == 'X' for cell in cases[6:9]):
+    elif all(i == 'X' for i in cases[6:9]):
         
         resultat = 1
         
@@ -126,15 +126,15 @@ def conditions_de_victoire_j2():                    # Vérification si le J2 ou 
     
     global resultat
     
-    if all(cell == 'O' for cell in cases[0:3]) :
+    if all(i == 'O' for i in cases[0:3]) :
         
         resultat = 2                                        # Définis l'état de la partie comme Victoire pour J2 ou l'IA 'O'
         
-    elif all(cell == 'O' for cell in cases[3:6]) :
+    elif all(i == 'O' for i in cases[3:6]) :
         
         resultat = 2
         
-    elif all(cell == 'O' for cell in cases[6:9]) :
+    elif all(i == 'O' for i in cases[6:9]) :
         
         resultat = 2
         
@@ -161,7 +161,7 @@ def conditions_de_victoire_j2():                    # Vérification si le J2 ou 
 
 def egalite(): # Vérifies que toutes les cases ont été jouées et qu'aucun joueur n'a gagné la partie donc,qu'il y a eu match nul.
     
-    if all(cell != ' ' for cell in cases) and resultat != 1 and resultat != 2:
+    if all(i != ' ' for i in cases) and resultat != 1 and resultat != 2:
         
         resultat = 0        # Définis l'état de la partie comme Match Nul.
 
