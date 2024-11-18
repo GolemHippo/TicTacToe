@@ -47,7 +47,7 @@ def change_de_joueur():                                     # Changes de joueur 
     joueur_actuel = 'O' if joueur_actuel == 'X' else 'X' # Si le joueur actuel est 'X' alors le prochain coup sera pour 'O'.
 
 
-def ia(cases,signe):
+def ia(cases,signe):                        # Fonction qui joue à la place de Joueur 2, Choisis une case jouable aléatoire
     
     cases_vide = [i for i in range(len(cases)) 
                    if cases[i] is cases[i] == " "] 
