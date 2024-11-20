@@ -161,6 +161,8 @@ def conditions_de_victoire_j2():                    # Vérification si le J2 ou 
 
 def egalite(): # Vérifies que toutes les cases ont été jouées et qu'aucun joueur n'a gagné la partie donc,qu'il y a eu match nul.
     
+    global resultat
+    
     if all(i != ' ' for i in cases) and resultat != 1 and resultat != 2:
         
         resultat = 0        # Définis l'état de la partie comme Match Nul.
